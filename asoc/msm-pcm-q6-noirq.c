@@ -949,7 +949,7 @@ static int msm_pcm_add_channel_map_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s%d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s%d", mixer_ctl_name, rtd->pcm->device);
 
 	fe_channel_map_control[0].name = mixer_str;
 	fe_channel_map_control[0].private_value = rtd->dai_link->id;
@@ -1053,7 +1053,7 @@ static int msm_pcm_add_fe_topology_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
+	scnprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
 		 rtd->pcm->device, topo_text);
 
 	topology_control[0].name = mixer_str;
@@ -1195,7 +1195,7 @@ static int msm_pcm_add_app_type_controls(struct snd_soc_pcm_runtime *rtd)
 			return ret;
 		}
 		kctl = app_type_info->kctl;
-		snprintf(kctl->id.name, ctl_len, "%s %d %s",
+		scnprintf(kctl->id.name, ctl_len, "%s %d %s",
 			     playback_mixer_ctl_name, rtd->pcm->device, suffix);
 		kctl->put = msm_pcm_playback_app_type_cfg_ctl_put;
 		kctl->get = msm_pcm_playback_app_type_cfg_ctl_get;
@@ -1214,7 +1214,7 @@ static int msm_pcm_add_app_type_controls(struct snd_soc_pcm_runtime *rtd)
 			return ret;
 		}
 		kctl = app_type_info->kctl;
-		snprintf(kctl->id.name, ctl_len, "%s %d %s",
+		scnprintf(kctl->id.name, ctl_len, "%s %d %s",
 		 capture_mixer_ctl_name, rtd->pcm->device, suffix);
 		kctl->put = msm_pcm_capture_app_type_cfg_ctl_put;
 		kctl->get = msm_pcm_capture_app_type_cfg_ctl_get;
@@ -1300,7 +1300,7 @@ static int msm_pcm_add_hwdep_dev(struct snd_soc_pcm_runtime *runtime)
 	int rc;
 	char id[] = "NOIRQ_NN";
 
-	snprintf(id, sizeof(id), "NOIRQ_%d", runtime->pcm->device);
+	scnprintf(id, sizeof(id), "NOIRQ_%d", runtime->pcm->device);
 	pr_debug("%s: pcm dev %d\n", __func__, runtime->pcm->device);
 	rc = snd_hwdep_new(runtime->card->snd_card,
 			   &id[0],

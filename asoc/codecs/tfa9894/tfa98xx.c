@@ -672,12 +672,12 @@ static ssize_t tfa98xx_dbgfs_r_read(struct file *file,
 	}
 
 	if (tfa98xx->tfa->spkr_count > 1) {
-		ret = snprintf(str, PAGE_SIZE,
+		ret = scnprintf(str, PAGE_SIZE,
 		              "Prim:%d mOhms, Sec:%d mOhms\n",
 		              tfa98xx->tfa->mohm[0],
 		              tfa98xx->tfa->mohm[1]);
 	} else {
-		ret = snprintf(str, PAGE_SIZE,
+		ret = scnprintf(str, PAGE_SIZE,
 		              "Prim:%d mOhms\n",
 		              tfa98xx->tfa->mohm[0]);
 	}
@@ -1823,16 +1823,16 @@ static int tfa98xx_append_i2c_address(struct device *dev,
 	int addr = i2c->addr;
 	if (dai_drv && num_dai > 0)
 		for(i = 0; i < num_dai; i++) {
-			snprintf(buf, 50, "%s-%x-%x",dai_drv[i].name, i2cbus,
+			scnprintf(buf, 50, "%s-%x-%x",dai_drv[i].name, i2cbus,
 				addr);
 			dai_drv[i].name = tfa98xx_devm_kstrdup(dev, buf);
 
-			snprintf(buf, 50, "%s-%x-%x",
+			scnprintf(buf, 50, "%s-%x-%x",
 						dai_drv[i].playback.stream_name,
 						i2cbus, addr);
 			dai_drv[i].playback.stream_name = tfa98xx_devm_kstrdup(dev, buf);
 
-			snprintf(buf, 50, "%s-%x-%x",
+			scnprintf(buf, 50, "%s-%x-%x",
 						dai_drv[i].capture.stream_name,
 						i2cbus, addr);
 			dai_drv[i].capture.stream_name = tfa98xx_devm_kstrdup(dev, buf);
@@ -1849,7 +1849,7 @@ static int tfa98xx_append_i2c_address(struct device *dev,
 				continue;
 			if((widgets[i].id == snd_soc_dapm_aif_in)
 				|| (widgets[i].id == snd_soc_dapm_aif_out)) {
-				snprintf(buf, 50, "%s-%x-%x", widgets[i].sname,
+				scnprintf(buf, 50, "%s-%x-%x", widgets[i].sname,
 					i2cbus, addr);
 				widgets[i].sname = tfa98xx_devm_kstrdup(dev, buf);
 			}

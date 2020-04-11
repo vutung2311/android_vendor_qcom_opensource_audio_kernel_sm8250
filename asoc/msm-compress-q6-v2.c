@@ -4361,7 +4361,7 @@ static int msm_compr_add_volume_control(struct snd_soc_pcm_runtime *rtd)
 		pr_err("failed to allocate mixer ctrl str of len %d", ctl_len);
 		return 0;
 	}
-	snprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
+	scnprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
 		 rtd->pcm->device, suffix);
 	fe_volume_control[0].name = mixer_str;
 	fe_volume_control[0].private_value = rtd->dai_link->id;
@@ -4412,7 +4412,7 @@ static int msm_compr_add_audio_effects_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return 0;
 
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 
 	fe_audio_effects_config_control[0].name = mixer_str;
 	fe_audio_effects_config_control[0].private_value = rtd->dai_link->id;
@@ -4463,7 +4463,7 @@ static int msm_compr_add_query_audio_effect_control(
 		pr_err("failed to allocate mixer ctrl str of len %d", ctl_len);
 		return 0;
 	}
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 	fe_query_audio_effect_control[0].name = mixer_str;
 	fe_query_audio_effect_control[0].private_value = rtd->dai_link->id;
 	pr_debug("%s: registering new mixer ctl %s\n", __func__, mixer_str);
@@ -4509,7 +4509,7 @@ static int msm_compr_add_audio_adsp_stream_cmd_control(
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 	fe_audio_adsp_stream_cmd_config_control[0].name = mixer_str;
 	fe_audio_adsp_stream_cmd_config_control[0].private_value =
 				rtd->dai_link->id;
@@ -4565,7 +4565,7 @@ static int msm_compr_add_audio_adsp_stream_callback_control(
 		goto done;
 	}
 
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 	fe_audio_adsp_callback_config_control[0].name = mixer_str;
 	fe_audio_adsp_callback_config_control[0].private_value =
 					rtd->dai_link->id;
@@ -4638,7 +4638,7 @@ static int msm_compr_add_dec_runtime_params_control(
 	if (!mixer_str)
 		return 0;
 
-	snprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
+	scnprintf(mixer_str, ctl_len, "%s %d %s", mixer_ctl_name,
 		 rtd->pcm->device, suffix);
 
 	fe_dec_params_control[0].name = mixer_str;
@@ -4699,10 +4699,10 @@ static int msm_compr_add_app_type_cfg_control(struct snd_soc_pcm_runtime *rtd)
 		return 0;
 
 	if (rtd->compr->direction == SND_COMPRESS_PLAYBACK)
-		snprintf(mixer_str, ctl_len, "%s %d %s",
+		scnprintf(mixer_str, ctl_len, "%s %d %s",
 			 playback_mixer_ctl_name, rtd->pcm->device, suffix);
 	else
-		snprintf(mixer_str, ctl_len, "%s %d %s",
+		scnprintf(mixer_str, ctl_len, "%s %d %s",
 			 capture_mixer_ctl_name, rtd->pcm->device, suffix);
 
 	fe_app_type_cfg_control[0].name = mixer_str;
@@ -4768,7 +4768,7 @@ static int msm_compr_add_channel_map_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s%d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s%d", mixer_ctl_name, rtd->pcm->device);
 
 	fe_channel_map_control[0].name = mixer_str;
 	fe_channel_map_control[0].private_value = rtd->dai_link->id;
@@ -4824,7 +4824,7 @@ static int msm_compr_add_io_fd_cmd_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 	fe_ion_fd_config_control[0].name = mixer_str;
 	fe_ion_fd_config_control[0].private_value = rtd->dai_link->id;
 	pr_debug("%s: Registering new mixer ctl %s\n", __func__, mixer_str);
@@ -4872,7 +4872,7 @@ static int msm_compr_add_event_ack_cmd_control(struct snd_soc_pcm_runtime *rtd)
 	if (!mixer_str)
 		return -ENOMEM;
 
-	snprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
+	scnprintf(mixer_str, ctl_len, "%s %d", mixer_ctl_name, rtd->pcm->device);
 	fe_event_ack_config_control[0].name = mixer_str;
 	fe_event_ack_config_control[0].private_value = rtd->dai_link->id;
 	pr_debug("%s: Registering new mixer ctl %s\n", __func__, mixer_str);
@@ -5209,11 +5209,11 @@ static int msm_compr_add_platform_controls(struct snd_kcontrol_new *kctl,
 		return -ENOMEM;
 
 	if (channels >= 0) {
-		snprintf(mixer_name, ctl_len, "%s %d %s %d",
+		scnprintf(mixer_name, ctl_len, "%s %d %s %d",
 			name_prefix, rtd->pcm->device, name_suffix, channels);
 		kctl->private_value = (rtd->dai_link->id) | (channels << 16);
 	} else {
-		snprintf(mixer_name, ctl_len, "%s %d %s",
+		scnprintf(mixer_name, ctl_len, "%s %d %s",
 			name_prefix, rtd->pcm->device, name_suffix);
 		kctl->private_value = (rtd->dai_link->id);
 	}
